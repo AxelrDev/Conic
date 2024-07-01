@@ -46,13 +46,12 @@ public class ConicSectionChart {
         
         double a = elipse.getA();
         double b = elipse.getB();
-        double p = elipse.getP();
   
         double y1 = 0;
         double y2 = 0;
         
         for(double i = -1000; i<=1000; i = i+0.01){
-           y1 =  Math.sqrt((p-(Math.pow(i, 2)/Math.pow(a, 2))) * Math.pow(b, 2));
+           y1 =  Math.sqrt((1-(Math.pow(i, 2)/Math.pow(a, 2))) * Math.pow(b, 2));
            //y2 =  Math.sqrt((p-(Math.pow(i, 2)/Math.pow(a, 2))) * Math.pow(b, 2));
            y2 = y1 *-1;
            series.add(i, y1);

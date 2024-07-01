@@ -1,34 +1,31 @@
 import javax.swing.*;
 
 public class Elipse {
-    private double a, b, p;
+    private double a, b;
 
     public void inputParameters() {
         JTextField aField = new JTextField();
         JTextField bField = new JTextField();
-        JTextField pField = new JTextField();
         Object[] message = {
             "Vértice a:", aField,
             "Vértice b:", bField,
-            "Coeficiente p:", pField
         };
 
         int option = JOptionPane.showConfirmDialog(null, message, "Ingrese los parámetros de la elipse", JOptionPane.OK_CANCEL_OPTION);
         if (option == JOptionPane.OK_OPTION) {
             a = Double.parseDouble(aField.getText());
             b = Double.parseDouble(bField.getText());
-            p = Double.parseDouble(pField.getText());
         }
     }
 
     public boolean validateParameters() {
-        return p != 0;
+        return (a != b);
     }
 
     public void calculateProperties() {
-        // La ecuación de la elipse es (x^2)/a + (y^2)/b = p
-        double focalLength = p;
-        double directrix = b - p;
+        // La ecuación de la elipse es (x^2)/a + (y^2)/b = 1
+        double focalLength = 1;
+        double directrix = b - 1;
 
         String properties = String.format(
             "Vértice: (%.2f, %.2f)%nFocal Length: %.2f%nDirectriz: y = %.2f",
@@ -38,8 +35,25 @@ public class Elipse {
         JOptionPane.showMessageDialog(null, properties, "Propiedades de la Elipse", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    public void calculateCuadratic() {
+        // La ecuación cuadratica de la elipse se obtiene multiplicando ambos lados por el mcm de los denominadores
+        double denominatorX = Math.pow(getA(), 2);
+        double denominatorY = Math.pow(getB(), 2);
+        Mcm min_cm = new Mcm();
+        double mcm = min_cm.calculateMCM(denominatorX, denominatorY);
+        double coeficientX = mcm / denominatorX;
+        double coeficientY = mcm / denominatorY;
+
+        String properties = String.format(
+            "Cuadratica: %.0fx^2 + %.0fy^2 - %.0f = 0%n",
+            coeficientX, coeficientY, mcm
+        );
+
+        JOptionPane.showMessageDialog(null, properties, "Propiedades de la Elipse", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     public void displayProperties() {
-        JOptionPane.showMessageDialog(null, "Elipse con vértice (" + a + ", " + b + ") y coeficiente " + p);
+        JOptionPane.showMessageDialog(null, "Elipse con vértice (" + a + ", " + b + ") y coeficiente " + 1);
     }
 
     public String getType() {
@@ -52,9 +66,5 @@ public class Elipse {
 
     public double getB() {
         return b;
-    }
-
-    public double getP() {
-        return p;
     }
 }

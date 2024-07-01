@@ -44,11 +44,11 @@ public class ConicSectionProgram extends JFrame {
                     }
                 }
                 else if(selectedOption.equals("Elipse")){
-                    JOptionPane.showMessageDialog(null, "Canonica: x^2/a^2 + y^2/b^2 = p");
+                    JOptionPane.showMessageDialog(null, "Canonica: x^2/a^2 + y^2/b^2 = 1");
                     Elipse elipse = new Elipse();
                     elipse.inputParameters();
                     if (elipse.validateParameters()) {
-                        elipse.calculateProperties();
+                        elipse.calculateCuadratic();
                         elipse.displayProperties();
                         ConicSectionChart.displayChart(elipse);
                     } else {
