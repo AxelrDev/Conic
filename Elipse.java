@@ -1,23 +1,23 @@
-package src;
+package Conic;
 import javax.swing.*;
 
-public class Parabola {
-    private double h, k, p;
+public class Elipse {
+    private double a, b, p;
 
     public void inputParameters() {
-        JTextField hField = new JTextField();
-        JTextField kField = new JTextField();
+        JTextField aField = new JTextField();
+        JTextField bField = new JTextField();
         JTextField pField = new JTextField();
         Object[] message = {
-            "Vértice h:", hField,
-            "Vértice k:", kField,
+            "Vértice a:", aField,
+            "Vértice b:", bField,
             "Coeficiente p:", pField
         };
 
-        int option = JOptionPane.showConfirmDialog(null, message, "Ingrese los parámetros de la parábola", JOptionPane.OK_CANCEL_OPTION);
+        int option = JOptionPane.showConfirmDialog(null, message, "Ingrese los parámetros de la elipse", JOptionPane.OK_CANCEL_OPTION);
         if (option == JOptionPane.OK_OPTION) {
-            h = Double.parseDouble(hField.getText());
-            k = Double.parseDouble(kField.getText());
+            a = Double.parseDouble(aField.getText());
+            b = Double.parseDouble(bField.getText());
             p = Double.parseDouble(pField.getText());
         }
     }
@@ -27,32 +27,32 @@ public class Parabola {
     }
 
     public void calculateProperties() {
-        // La ecuación de la parábola es (x-h)^2 = 4p(y-k)
+        // La ecuación de la elipse es (x^2)/a + (y^2)/b = p
         double focalLength = p;
-        double directrix = k - p;
+        double directrix = b - p;
 
         String properties = String.format(
             "Vértice: (%.2f, %.2f)%nFocal Length: %.2f%nDirectriz: y = %.2f",
-            h, k, focalLength, directrix
+            a, b, focalLength, directrix
         );
 
-        JOptionPane.showMessageDialog(null, properties, "Propiedades de la Parábola", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, properties, "Propiedades de la Elipse", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void displayProperties() {
-        JOptionPane.showMessageDialog(null, "Parábola con vértice (" + h + ", " + k + ") y coeficiente " + p);
+        JOptionPane.showMessageDialog(null, "Elipse con vértice (" + a + ", " + b + ") y coeficiente " + p);
     }
 
     public String getType() {
-        return "Parábola";
+        return "Elipse";
     }
 
-    public double getH() {
-        return h;
+    public double getA() {
+        return a;
     }
 
-    public double getK() {
-        return k;
+    public double getB() {
+        return b;
     }
 
     public double getP() {

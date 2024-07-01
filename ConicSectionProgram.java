@@ -1,4 +1,4 @@
-package src;
+package Conic;
 import javax.swing.*;
 
 import java.awt.event.ActionEvent;
@@ -20,7 +20,7 @@ public class ConicSectionProgram extends JFrame {
         label.setBounds(10, 10, 280, 25);
         panel.add(label);
 
-        String[] options = {"Parábola"};
+        String[] options = {"Parábola", "Elipse"};
         JComboBox<String> comboBox = new JComboBox<>(options);
         comboBox.setBounds(10, 40, 160, 25);
         panel.add(comboBox);
@@ -32,16 +32,31 @@ public class ConicSectionProgram extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Parabola parabola = new Parabola();
-
-                parabola.inputParameters();
-                if (parabola.validateParameters()) {
-                    parabola.calculateProperties();
-                    parabola.displayProperties();
-                    ConicSectionChart.displayChart(parabola);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Los parámetros ingresados son inválidos.");
+                String selectedOption = (String) comboBox.getSelectedItem();
+                if(selectedOption.equals("Parábola")){
+                    Parabola parabola = new Parabola();
+                    parabola.inputParameters();
+                    if (parabola.validateParameters()) {
+                        parabola.calculateProperties();
+                        parabola.displayProperties();
+                        ConicSectionChart.displayChart(parabola);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Los parámetros ingresados son inválidos.");
+                    }
                 }
+                else if(selectedOption.equals("Elipse")){
+                    JOptionPane.showMessageDialog(null, "Canonica: x^2/a^2 + y^2/b^2 = p");
+                    Elipse elipse = new Elipse();
+                    elipse.inputParameters();
+                    if (elipse.validateParameters()) {
+                        elipse.calculateProperties();
+                        elipse.displayProperties();
+                        ConicSectionChart.displayChart(elipse);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Los parámetros ingresados son inválidos.");
+                    }
+                }
+                
             }
         });
     }
