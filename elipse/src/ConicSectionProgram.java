@@ -1,10 +1,16 @@
 import javax.swing.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * @class ConicSectionProgram
+ * @brief Programa para trabajar con secciones cónicas (parábola y elipse).
+ */
 public class ConicSectionProgram extends JFrame {
 
+    /**
+     * @brief Constructor que configura la ventana principal del programa.
+     */
     public ConicSectionProgram() {
         setTitle("Cónicas");
         setSize(300, 200);
@@ -32,7 +38,7 @@ public class ConicSectionProgram extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String selectedOption = (String) comboBox.getSelectedItem();
-                if(selectedOption.equals("Parábola")){
+                if (selectedOption.equals("Parábola")) {
                     Parabola parabola = new Parabola();
                     parabola.inputParameters();
                     if (parabola.validateParameters()) {
@@ -42,8 +48,7 @@ public class ConicSectionProgram extends JFrame {
                     } else {
                         JOptionPane.showMessageDialog(null, "Los parámetros ingresados son inválidos.");
                     }
-                }
-                else if(selectedOption.equals("Elipse")){
+                } else if (selectedOption.equals("Elipse")) {
                     JOptionPane.showMessageDialog(null, "Canonica: x^2/a^2 + y^2/b^2 = 1");
                     Elipse elipse = new Elipse();
                     elipse.inputParameters();
@@ -55,11 +60,14 @@ public class ConicSectionProgram extends JFrame {
                         JOptionPane.showMessageDialog(null, "Los parámetros ingresados son inválidos.");
                     }
                 }
-                
             }
         });
     }
 
+    /**
+     * @brief Método principal que inicia la aplicación.
+     * @param args Argumentos de línea de comandos.
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override

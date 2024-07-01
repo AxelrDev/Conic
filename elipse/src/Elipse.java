@@ -1,8 +1,15 @@
 import javax.swing.*;
 
+/**
+ * @class Elipse
+ * @brief Representa una elipse con sus propiedades y métodos para calcular y mostrar sus parámetros.
+ */
 public class Elipse {
     private double a, b;
 
+    /**
+     * @brief Solicita al usuario los parámetros de la elipse mediante un cuadro de diálogo.
+     */
     public void inputParameters() {
         JTextField aField = new JTextField();
         JTextField bField = new JTextField();
@@ -18,25 +25,18 @@ public class Elipse {
         }
     }
 
+    /**
+     * @brief Valida los parámetros de la elipse. Verifica que a y b no sean iguales.
+     * @return true si a y b son diferentes, false en caso contrario.
+     */
     public boolean validateParameters() {
         return (a != b);
     }
 
-    public void calculateProperties() {
-        // La ecuación de la elipse es (x^2)/a + (y^2)/b = 1
-        double focalLength = 1;
-        double directrix = b - 1;
-
-        String properties = String.format(
-            "Vértice: (%.2f, %.2f)%nFocal Length: %.2f%nDirectriz: y = %.2f",
-            a, b, focalLength, directrix
-        );
-
-        JOptionPane.showMessageDialog(null, properties, "Propiedades de la Elipse", JOptionPane.INFORMATION_MESSAGE);
-    }
-
+    /**
+     * @brief Calcula y muestra la forma cuadrática de la elipse y su matriz asociada en cuadros de diálogo.
+     */
     public void calculateCuadratic() {
-        // La ecuación cuadratica de la elipse se obtiene multiplicando ambos lados por el mcm de los denominadores
         double denominatorX = Math.pow(getA(), 2);
         double denominatorY = Math.pow(getB(), 2);
         Mcm min_cm = new Mcm();
@@ -56,18 +56,33 @@ public class Elipse {
         JOptionPane.showMessageDialog(null, matriz_cuadratica, "Propiedades de la Elipse", JOptionPane.PLAIN_MESSAGE);
     }
 
+    /**
+     * @brief Muestra las propiedades básicas de la elipse en un cuadro de diálogo.
+     */
     public void displayProperties() {
-        JOptionPane.showMessageDialog(null, "Elipse con vértice (" + a + ", " + b + ") y coeficiente " + 1);
+        JOptionPane.showMessageDialog(null, "Elipse con limites (" + a + " y " + b + ") y constante " + 1);
     }
 
+    /**
+     * @brief Devuelve el tipo de esta figura geométrica.
+     * @return El tipo de la figura (en este caso, "Elipse").
+     */
     public String getType() {
         return "Elipse";
     }
 
+    /**
+     * @brief Obtiene el valor del vértice a.
+     * @return El valor del vértice a.
+     */
     public double getA() {
         return a;
     }
 
+    /**
+     * @brief Obtiene el valor del vértice b.
+     * @return El valor del vértice b.
+     */
     public double getB() {
         return b;
     }

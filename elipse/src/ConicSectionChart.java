@@ -8,8 +8,16 @@ import org.jfree.data.xy.XYSeriesCollection;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @class ConicSectionChart
+ * @brief Clase para generar y mostrar gráficos de secciones cónicas (parábola y elipse).
+ */
 public class ConicSectionChart {
 
+    /**
+     * @brief Muestra un gráfico de una parábola.
+     * @param parabola La instancia de la parábola a graficar.
+     */
     public static void displayChart(Parabola parabola) {
         XYSeries series = new XYSeries(parabola.getType());
         
@@ -17,6 +25,7 @@ public class ConicSectionChart {
         double k = parabola.getK();
         double p = parabola.getP();
 
+        // Generar puntos para la parábola
         for (double x = h - 10; x <= h + 10; x += 0.1) {
             double y = (1 / (4 * p)) * Math.pow(x - h, 2) + k;
             series.add(x, y);
@@ -24,63 +33,55 @@ public class ConicSectionChart {
 
         XYSeriesCollection dataset = new XYSeriesCollection(series);
         JFreeChart chart = ChartFactory.createXYLineChart(
-                parabola.getType(),
-                "X",
-                "Y",
-                dataset,
-                PlotOrientation.VERTICAL,
-                true,
-                true,
-                false
+                parabola.getType(),    // Título del gráfico
+                "X",                   // Etiqueta del eje X
+                "Y",                   // Etiqueta del eje Y
+                dataset,               // Dataset de los datos
+                PlotOrientation.VERTICAL,  // Orientación del gráfico
+                true,                  // Mostrar leyenda
+                true,                  // Mostrar tooltips
+                false                  // Mostrar URLs
         );
 
+        // Configurar y mostrar la ventana del gráfico
         JFrame frame = new JFrame("Gráfica de la Parábola");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().add(new ChartPanel(chart), BorderLayout.CENTER);
         frame.pack();
         frame.setVisible(true);
     }
+
+    /**
+     * @brief Muestra un gráfico de una elipse.
+     * @param elipse La instancia de la elipse a graficar.
+     */
     public static void displayChart(Elipse elipse) {
         XYSeries series = new XYSeries(elipse.getType());
-        
         
         double a = elipse.getA();
         double b = elipse.getB();
   
-        double y1 = 0;
-        double y2 = 0;
-        
-        for(double i = -1000; i<=1000; i = i+0.01){
-           y1 =  Math.sqrt((1-(Math.pow(i, 2)/Math.pow(a, 2))) * Math.pow(b, 2));
-           //y2 =  Math.sqrt((p-(Math.pow(i, 2)/Math.pow(a, 2))) * Math.pow(b, 2));
-           y2 = y1 *-1;
-           series.add(i, y1);
-           series.add(i, y2);
+        // Generar puntos para la elipse
+        for (double i = -1000; i <= 1000; i += 0.01) {
+            double y1 = Math.sqrt((1 - (Math.pow(i, 2) / Math.pow(a, 2))) * Math.pow(b, 2));
+            double y2 = y1 * -1;  // Punto simétrico respecto al eje X
+            series.add(i, y1);
+            series.add(i, y2);
         }
-        //for(int i = -10000; i<=10000; ++i){
-          //x = -1* Math.sqrt((p-(Math.pow(i, 2)/Math.pow(a, 2))) * Math.pow(b, 2));
-
-        //  series.add(i, x);
-       //}
-
-        //for(int i = -100; i<=100; ++i){
-        //  x =  Math.sqrt((p+(Math.pow(i, 2)/Math.pow(b, 2))) * Math.pow(a, 2));
-        //  series.add(x, i);
-        //}
-
 
         XYSeriesCollection dataset = new XYSeriesCollection(series);
         JFreeChart chart = ChartFactory.createXYLineChart(
-                elipse.getType(),
-                "X",
-                "Y",
-                dataset,
-                PlotOrientation.VERTICAL,
-                true,
-                true,
-                false
+                elipse.getType(),      // Título del gráfico
+                "X",                   // Etiqueta del eje X
+                "Y",                   // Etiqueta del eje Y
+                dataset,               // Dataset de los datos
+                PlotOrientation.VERTICAL,  // Orientación del gráfico
+                true,                  // Mostrar leyenda
+                true,                  // Mostrar tooltips
+                false                  // Mostrar URLs
         );
 
+        // Configurar y mostrar la ventana del gráfico
         JFrame frame = new JFrame("Gráfica de la Elipse");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.getContentPane().add(new ChartPanel(chart), BorderLayout.CENTER);
