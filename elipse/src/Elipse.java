@@ -44,12 +44,16 @@ public class Elipse {
         double coeficientX = mcm / denominatorX;
         double coeficientY = mcm / denominatorY;
 
-        String properties = String.format(
+        String forma_cuadratica = String.format(
             "Cuadratica: %.0fx^2 + %.0fy^2 - %.0f = 0%n",
             coeficientX, coeficientY, mcm
         );
-
-        JOptionPane.showMessageDialog(null, properties, "Propiedades de la Elipse", JOptionPane.INFORMATION_MESSAGE);
+        String matriz_cuadratica = String.format(
+            "Matriz de la forma cuadratica:\n     x   y  \n_______\nx |  %-3.0f 0   \ny |  0    %-3.0f ",
+            coeficientX, coeficientY
+        );
+        JOptionPane.showMessageDialog(null, forma_cuadratica, "Propiedades de la Elipse", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, matriz_cuadratica, "Propiedades de la Elipse", JOptionPane.PLAIN_MESSAGE);
     }
 
     public void displayProperties() {
